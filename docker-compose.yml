@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  www:
+    build: ./www
+    ports:
+      - "3000:3000"
+  api:
+    build: ./api
+    ports: 
+      - "3002:3002"

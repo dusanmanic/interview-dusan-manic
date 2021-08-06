@@ -14,8 +14,6 @@ const port = 3002;
 const url = "mongodb+srv://administrator:NemaSifra123@cluster0.zhtov.mongodb.net/tasksDB"
 
 mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-.then( () => console.log("Connected to MongoDB"))
-.catch( error => console.log(error))
 
 const connection = mongoose.connection
 connection.once( 'open', () => {
