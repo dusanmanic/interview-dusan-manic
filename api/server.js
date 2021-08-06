@@ -11,9 +11,11 @@ app.use(express.json());
 app.use(cors());
 
 const port = 3002;
-const url = "mongodb://127.0.0.1:27017/tasksDB"
+const url = "mongodb+srv://administrator:NemaSifra123@cluster0.zhtov.mongodb.net/tasksDB"
 
 mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+.then( () => console.log("Connected to MongoDB"))
+.catch( error => console.log(error))
 
 const connection = mongoose.connection
 connection.once( 'open', () => {
