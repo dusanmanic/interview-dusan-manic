@@ -6,25 +6,33 @@
   align-items: center;
 }
 
+.container {  
+  width: 650px;
+  margin-top: 120px;
+}
+
 .form-task {
   display: flex;
   flex-direction: column;
 }
 
 .task-wrapper {
-  width: 550px;
-  height: 50px;
-  margin: 5px;
-  padding: 3px;
-  background-color: aquamarine;
-  border-radius: 12px;
+  /* width: 550px; */
+  /* height: 50px; */
+  /* margin: 5px; */
+  /* padding: 3px; */
+  /* background-color: aquamarine; */
+  /* border-radius: 12px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .task-checkbox {
-  margin: 25px;
+  /* margin: 25px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .task-text {
@@ -43,16 +51,29 @@ input:focus{
   outline: none;
 }
 
-.pencil-bin-mark {
+.icon-wrapper {
   width: 100px;
   height: 50px;
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.pencil {
+.card-panel {
+  padding: 10px;
+}
+
+.number-checkbox-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 75px;
+  justify-content: space-around;
+}
+
+/* .pencil {
   width: 30px;
   height: 30px;
   background-image: url("./asets/pencil.png");
@@ -74,7 +95,7 @@ input:focus{
   background-image: url("./asets/bin.png");
   background-size: cover;
   cursor: pointer;
-}
+} */
 
 .task-div {
   width: 30px;

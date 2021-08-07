@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { nanoid } from 'nanoid'
+import 'materialize-css';
+import {CardPanel, Checkbox, Icon} from 'react-materialize';
 import './App.css';
 
 function App() {
@@ -10,7 +12,7 @@ function App() {
   const [contentEdit, setContentEdit] = useState(false)
 
   useEffect(() => {
-    fetch("http://localhost:3002/all-tasks")
+    fetch("http://178.17.23.90:3002/all-tasks")
     .then(res => res.json()
     .then(data => {
       setTasks(data)
@@ -50,14 +52,15 @@ function App() {
   }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
   const CheckboxType = event => {
-    // console.log(event.target.checked)
-    // console.log(event.target.name)
+    console.log(event.target.checked)
+    console.log(event.target.name)
+    console.log(event.target.id)
     // console.log(tasks)
 
     let arrayOfTasks = {}
 
     tasks.forEach((data, index) => {
-      if(data.taskId === event.target.name) {
+      if(data.taskId === event.target.id) {
         // console.log(data.taskName)
         console.log(tasks[index])
         
@@ -116,6 +119,8 @@ function App() {
     event.preventDefault()
     let arrayOfTasks = {}
 
+    console.log(event.target.classList[1])
+
     tasks.forEach((data, index) => {
       if(data.taskId === event.target.classList[1]) {
         // console.log(data.taskName)
@@ -124,7 +129,7 @@ function App() {
           ...tasks[index],
           "contentEdited": true
         }
-        // console.log(arrayOfTasks.taskName)
+        console.log(arrayOfTasks.taskName)
       }
     })
     
@@ -148,6 +153,8 @@ function App() {
   const CheckItem = event => {
     event.preventDefault()
     let arrayOfTasks = {}
+
+
 
     tasks.forEach((data, index) => {
       if(data.taskId === (event.target.classList[1])) {
@@ -178,45 +185,108 @@ function App() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="App">
-
+      <div className="container" >
       <form className="form-task" onSubmit={SubmitTask}>
         <label className="form-task-label"> Enter task </label>
         <input className="form-task-input" type="text" name="task" onChange={CurrentTask} />
-        <button className="form-task-submit" type="submit"> Submit task </button>
-      </form>     
- 
-      <div className="task-container" >
+        <button className="btn waves-effect waves-light" type="submit"> 
+          Submit task 
+          <i className="material-icons right">send</i>
+        </button>
+      </form>
           {
-            tasks.map(data => {              
+            tasks.map((data, index) => {              
               if(!data.contentEdited) {
-                return (              
-                  <div className="task-wrapper" key={nanoid()} >
-                    <input className="task-checkbox" type="checkbox" name={data.taskId} onChange={CheckboxType} checked={data.checked} />
-                    <p className="task-text" style={{ textDecoration: data.style }}> {data.taskName} </p>
-                    <div className="pencil-bin-mark">
-                      <div className={`pencil ${data.taskId}`} onClick={EditItem} />
-                      <div className={`bin ${data.taskId}`} onClick={DeleteItem} />
-                    </div>
-                  </div>
+                return (          
+                
+                <CardPanel className="teal task-wrapper" key={nanoid()} > 
+                      <div className="number-checkbox-wrapper">
+                        <p className="task-text"> {index + 1}. </p>                   
+                        <Checkbox
+                          label=""
+                          name={data.taskId}
+                          id={data.taskId}
+                          value={data.taskId}
+                          onChange={CheckboxType}
+                          checked={data.checked}
+                        />
+                      </div>
+                      <p className="task-text" style={{ textDecoration: data.style }}> {data.taskName} </p>
+                      <div className="icon-wrapper">
+                        <Icon
+                          className={`${data.taskId}`}
+                          onClick={EditItem}
+                          >
+                          edit
+                        </Icon>
+                        <Icon
+                          className={`${data.taskId}`}
+                          onClick={DeleteItem} 
+                          >
+                          delete
+                        </Icon>
+                      </div>
+                </CardPanel>
                 )
               } else {
                 return (              
-                  <div className="task-wrapper" key={nanoid()} >
-                    <p className="task-text" style={{marginLeft: '15px'}}>Edit task:</p>
-                    <input className="task-input" type="text" name="editedTask" onChange={CurrentTask} value={task} />
-                    <div className="pencil-bin-mark">
-                      <div className={`mark ${data.taskId}`} onClick={CheckItem} />
-                      <div className={`bin ${data.taskId}`} onClick={DeleteItem} />
-                    </div>
-                  </div>
+                  <CardPanel className="teal task-wrapper" key={nanoid()} >
+                    <Checkbox
+                      className="task-checkbox"
+                      label=""
+                      id={data.taskId}
+                      value={data.taskId}
+                      onChange={CheckboxType}
+                      checked={data.checked}
+                    />
+                      <p className="task-text" style={{marginLeft: '15px'}}>Edit task:</p>
+                      <input className="task-input" type="text" name="editedTask" onChange={CurrentTask} value={task} />
+                      <div className="icon-wrapper">
+                        <Icon
+                          className={`${data.taskId}`}
+                          onClick={CheckItem} 
+                          >
+                          check
+                        </Icon>
+                        <Icon
+                          className={`${data.taskId}`}
+                          onClick={DeleteItem} 
+                          >
+                          delete
+                        </Icon>
+                      </div>
+                  </CardPanel>
                 )
               }             
             })
           }
       </div>
-
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+{/* <div className="task-wrapper" key={nanoid()} >
+      <p className="task-text" style={{marginLeft: '15px'}}>Edit task:</p>
+      <input className="task-input" type="text" name="editedTask" onChange={CurrentTask} value={task} />
+
+      <p className="task-text" style={{ textDecoration: data.style }}> {data.taskName} </p>
+
+
+      <div className="pencil-bin-mark">
+
+        <div className={`pencil ${data.taskId}`} onClick={EditItem} />
+        <div className={`bin ${data.taskId}`} onClick={DeleteItem} />
+
+
+        <div className={`mark ${data.taskId}`} onClick={CheckItem} />
+        <div className={`bin ${data.taskId}`} onClick={DeleteItem} />
+
+        
+      </div>
+</div> */}
