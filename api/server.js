@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const {Tasks} = require('./models/tasks.model')
 
@@ -11,6 +11,9 @@ app.use(express.json());
 app.use(cors());
 
 const port = 3002;
+
+app.listen(port, () => console.log(`Server is running on port: ${port}`))
+
 const url = "mongodb+srv://administrator:NemaSifra123@cluster0.zhtov.mongodb.net/tasksDB"
 
 mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
@@ -69,7 +72,3 @@ app.get('/', (req, res) => {
 //     })
 //     // console.log(req.body.arrayOfItems)
 // })
-
-app.listen(port, () => {
-console.log(`Server is running on port: ${port}`);
-});
