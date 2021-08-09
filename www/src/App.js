@@ -12,7 +12,7 @@ function App() {
   const [contentEdit, setContentEdit] = useState(false)
 
   useEffect(() => {
-    fetch("http://178.17.23.90:3002/all-tasks")
+    fetch("http://localhost:8000/all-tasks")
     .then(res => res.json()
     .then(data => {
       setTasks(data)
@@ -41,7 +41,7 @@ function App() {
     // console.log(arrayOfTasks)
     console.log(tasks)
 
-    fetch("http://localhost:3002/add-task", {
+    fetch("http://localhost:8000/add-task", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({arrayOfTasks})
@@ -85,7 +85,7 @@ function App() {
     setCheckbox(checkbox ? false : true)
     // console.log(checkbox)
 
-    fetch("http://localhost:3002/update-task", {
+    fetch("http://localhost:8000/update-task", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({arrayOfTasks})
@@ -108,7 +108,7 @@ function App() {
     setTasks(filteredArray)
     // console.log(tasks)
 
-    fetch("http://localhost:3002/remove-task", {
+    fetch("http://localhost:8000/remove-task", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({arrayOfTasks})
@@ -174,7 +174,7 @@ function App() {
       }
     })
 
-    fetch("http://localhost:3002/update-task", {
+    fetch("http://localhost:8000/update-task", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({arrayOfTasks})

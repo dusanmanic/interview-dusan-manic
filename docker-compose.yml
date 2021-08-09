@@ -4,12 +4,12 @@ services:
     container_name: interview-dusan-manic_www_1
     build: ./www
     ports:
-      - "3000:3000"
+      - "3000"
   api:
     container_name: interview-dusan-manic_api_1
     build: ./api
     ports: 
-      - "3002:3002"
+      - "3002"
   nginx:
     image: nginx:1.21.0
     depends_on: 
