@@ -1,10 +1,21 @@
 version: "3.8"
 services:
   www:
+    container_name: interview-dusan-manic_www_1
     build: ./www
     ports:
-      - "8080:3000"
+      - "3000:3000"
   api:
+    container_name: interview-dusan-manic_api_1
     build: ./api
     ports: 
       - "3002:3002"
+  nginx:
+    image: nginx:1.21.0
+    depends_on: 
+      - www-app
+      - api-app
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8000:8000
